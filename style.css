@@ -1,0 +1,315 @@
+/* style.css */
+
+:root {
+    --color-fondo-principal: #121212;
+    --color-texto-principal: #EAEAEA;
+    --color-acento: #A52A2A; /* Marrón rojizo oscuro, como óxido o sangre seca */
+    --color-detalle: #3A3A3A;
+    --fuente-titulo: 'Georgia', serif;
+    --fuente-cuerpo: 'Arial', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-fondo-principal);
+    color: var(--color-texto-principal);
+    font-family: var(--fuente-cuerpo);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Previene el desplazamiento horizontal inesperado */
+}
+
+/* --- Header y Navegación --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(18, 18, 18, 0.9);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--color-detalle);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-family: var(--fuente-titulo);
+    color: var(--color-acento);
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: var(--color-texto-principal);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.95em;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    opacity: 1;
+    color: var(--color-acento);
+}
+
+/* --- Sección Principal (Hero) --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10%;
+    /* Añadir un fondo sutil de textura oscura */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="%23202020"/><rect x="50" y="50" width="1" height="1" fill="%23202020"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');
+    background-size: 20px 20px;
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+    font-family: var(--fuente-titulo);
+    color: var(--color-acento);
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+#btn-acceso {
+    background: none;
+    color: var(--color-texto-principal);
+    border: 2px solid var(--color-acento);
+    padding: 12px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, color 0.3s;
+    letter-spacing: 1px;
+}
+
+#btn-acceso:hover {
+    background-color: var(--color-acento);
+    color: var(--color-fondo-principal);
+    transform: translateY(-3px);
+}
+
+/* --- Secciones Ocultas --- */
+main section:not(.hero) {
+    padding: 80px 5%;
+    min-height: 80vh;
+    border-top: 1px solid var(--color-detalle);
+    opacity: 0; /* Inicialmente ocultas, se revelan con JS */
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.hidden-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    color: var(--color-acento);
+    border-bottom: 2px solid var(--color-detalle);
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+/* --- Carrusel (Archivo) --- */
+.carrusel-contenedor {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    height: 400px; /* Altura fija para el ejemplo */
+}
+
+.carrusel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-detalle);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    border-radius: 8px;
+}
+
+.carrusel-item.active {
+    opacity: 1;
+}
+
+.carrusel-item h3 {
+    font-size: 1.8em;
+    color: var(--color-acento);
+    margin-bottom: 15px;
+}
+
+.carrusel-item p {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.carrusel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--color-texto-principal);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 50;
+    font-size: 1.5em;
+    transition: background 0.3s;
+}
+
+.carrusel-btn:hover {
+    background: var(--color-acento);
+}
+
+.carrusel-btn.prev { left: 0; border-radius: 0 5px 5px 0; }
+.carrusel-btn.next { right: 0; border-radius: 5px 0 0 5px; }
+
+
+/* --- Cripta de Creadores --- */
+.creadores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.creador-card {
+    background-color: var(--color-detalle);
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid var(--color-acento);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.creador-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.creador-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--color-acento);
+}
+
+.creador-card h3 {
+    color: var(--color-texto-principal);
+    margin-bottom: 5px;
+}
+
+.creador-card p {
+    font-size: 0.9em;
+    color: #AAA;
+    margin-bottom: 15px;
+}
+
+.enlace-proyecto {
+    display: block;
+    margin-top: 5px;
+    color: #4CAF50; /* Un color de enlace que contraste bien */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.enlace-proyecto:hover {
+    color: var(--color-texto-principal);
+    text-decoration: underline;
+}
+
+/* --- Cápsula del Tiempo (Proyectos Anteriores) --- */
+.proyectos-enlaces {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.proyectos-enlaces h3 {
+    color: var(--color-acento);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.proyecto-link {
+    display: block;
+    background-color: var(--color-detalle);
+    padding: 15px;
+    margin: 10px 0;
+    text-decoration: none;
+    color: var(--color-texto-principal);
+    border-left: 5px solid var(--color-acento);
+    transition: background-color 0.3s, border-left-color 0.3s, letter-spacing 0.3s;
+}
+
+.proyecto-link:hover {
+    background-color: #282828;
+    border-left-color: #900000; /* Un tono más intenso */
+    letter-spacing: 1px;
+}
+
+.magic-link {
+    font-weight: bold;
+    color: #00FFD1; /* Color neón para el proyecto de la fase 2 */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8em;
+    border-top: 1px solid var(--color-detalle);
+    background-color: #0A0A0A;
+}
+
+footer a {
+    color: var(--color-acento);
+    text-decoration: none;
+}
+
+/* --- Animaciones JS con CSS (Para el subtítulo) --- */
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0.5;
+        text-shadow: 0 0 1px #F0F0F0;
+    }
+}
+
+#subtitulo-animado {
+    animation: flicker 4s infinite alternate;
+}
